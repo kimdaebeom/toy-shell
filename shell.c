@@ -5,8 +5,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <pwd.h>
 
 #define MAX_LEN_LINE    100
+#define LEN_HOSTNAME    30
 
 int main(void)
 {
@@ -14,12 +16,18 @@ int main(void)
     char *args[] = {command, NULL};
     int ret, status;
     pid_t pid, cpid;
+
+    char hostname[LEN_HOSTNAME + 1];
+    memset(hostname, 0x00, sizeof(hostname));
+    gethostname(hostname, LEN_HOSTNAME);
     
     while (true) {
         char *s;
         int len;
         
-        printf("MyShell $ ");
+	printf("MyShell ");
+	printf("%s@%s: $", getpwuid(getuid())->pw_name, hostname);
+        
         s = fgets(command, MAX_LEN_LINE, stdin);
         if (s == NULL) {
             fprintf(stderr, "fgets failed\n");
