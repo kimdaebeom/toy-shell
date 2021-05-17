@@ -9,6 +9,7 @@
 
 #define MAX_LEN_LINE    100
 #define LEN_HOSTNAME    30
+#define LEN_DIR    100
 
 int main(void)
 {
@@ -20,20 +21,26 @@ int main(void)
     char hostname[LEN_HOSTNAME + 1];
     memset(hostname, 0x00, sizeof(hostname));
     gethostname(hostname, LEN_HOSTNAME);
-    
+    char pwd[LEN_DIR + 1];
+    getcwd(pwd,sizeof(pwd));
+
     while (true) {
         char *s;
         int len;
-        
+       
 	printf("MyShell ");
-	printf("%s@%s: $", getpwuid(getuid())->pw_name, hostname);
+	printf("%s@%s:%s$", getpwuid(getuid())->pw_name, hostname,pwd);
         
         s = fgets(command, MAX_LEN_LINE, stdin);
         if (s == NULL) {
             fprintf(stderr, "fgets failed\n");
             exit(1);
         }
-        
+       
+	if (s == "exit") {
+		return 0;
+	}
+
         len = strlen(command);
         printf("%d\n", len);
         if (command[len - 1] == '\n') {
