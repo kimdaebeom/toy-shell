@@ -27,22 +27,15 @@ int main(void)
     while (true) {
         char *s;
         int len;
+	
+	printf("\033[32m%s\033[32m@%s:\033[34m%s\033[0m$ ", getpwuid(getuid())->pw_name, hostname,pwd);
        
-	printf("MyShell ");
-	printf("%s@%s:%s$", getpwuid(getuid())->pw_name, hostname,pwd);
-        
-        s = fgets(command, MAX_LEN_LINE, stdin);
-        if (s == NULL) {
+	s = fgets(command, MAX_LEN_LINE, stdin);
+	if (s == NULL) {
             fprintf(stderr, "fgets failed\n");
             exit(1);
         }
        
-	if (s == "exit") {
-		return 0;
-	}
-
-        len = strlen(command);
-        printf("%d\n", len);
         if (command[len - 1] == '\n') {
             command[len - 1] = '\0'; 
         }
