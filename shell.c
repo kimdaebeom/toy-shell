@@ -31,11 +31,26 @@ int main(void)
 	printf("\033[32m%s\033[32m@%s:\033[34m%s\033[0m$ ", getpwuid(getuid())->pw_name, hostname,pwd);
        
 	s = fgets(command, MAX_LEN_LINE, stdin);
+	
+	command[strlen(command) -1] = '\0';
+
 	if (s == NULL) {
             fprintf(stderr, "fgets failed\n");
             exit(1);
         }
-
+        	else if (strcmp(command, "exit")==0){
+	    return -1;
+	}
+	else if (strcmp(command,"ls")==0){
+	    args[0] = "/bin/ls";
+	}
+	else if (strcmp(command, "cd")==0){
+	    //chdir(arg);
+	}
+	else{
+	    fprintf(stderr, "[there is no command %s.]\n", command);
+	}
+	
     	len = strlen(command);
 	printf("%d\n", len);	
         if (command[len - 1] == '\n') {
@@ -60,12 +75,6 @@ int main(void)
             }
         }
         else {  /* child */
-	    if (strcmp(args[0],"ls")==0){
-		    args[0] = "/bin/ls";
-	    }
-	    else if (strcmp(args[0], "exit")==0){
-		    exit(0);	    
-	    }
 	    ret = execve(args[0], args, NULL);
 	    if (ret < 0) {
                 fprintf(stderr, "execve failed\n");   
