@@ -35,13 +35,15 @@ int main(void)
             fprintf(stderr, "fgets failed\n");
             exit(1);
         }
-       
+
+    	len = strlen(command);
+	printf("%d\n", len);	
         if (command[len - 1] == '\n') {
             command[len - 1] = '\0'; 
         }
         
         printf("[%s]\n", command);
-      
+     
         pid = fork();
         if (pid < 0) {
             fprintf(stderr, "fork failed\n");
@@ -58,12 +60,20 @@ int main(void)
             }
         }
         else {  /* child */
-            ret = execve(args[0], args, NULL);
-            if (ret < 0) {
+	    if (strcmp(args[0],"ls")==0){
+		    args[0] = "/bin/ls";
+	    }
+	    else if (strcmp(args[0], "exit")==0){
+		    exit(0);	    
+	    }
+	    ret = execve(args[0], args, NULL);
+	    if (ret < 0) {
                 fprintf(stderr, "execve failed\n");   
                 return 1;
             }
+	    
         } 
     }
     return 0;
 }
+
