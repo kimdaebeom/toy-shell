@@ -14,21 +14,21 @@
 int main(void)
 {
     char command[MAX_LEN_LINE];
-    char *args[] = {command, NULL};
     char *arg;
+    char *args[] = {command, arg, NULL};
     int ret, status;
     pid_t pid, cpid;
 
     char hostname[LEN_HOSTNAME + 1];
     memset(hostname, 0x00, sizeof(hostname));
     gethostname(hostname, LEN_HOSTNAME);
-    char pwd[LEN_DIR + 1];
-    getcwd(pwd,sizeof(pwd));
 
     while (true) {
         char *s;
         int len;
-	
+	char pwd[LEN_DIR + 1];
+	getcwd(pwd,sizeof(pwd));
+
 	printf("\033[32m%s\033[32m@%s:\033[34m%s\033[0m$ ", getpwuid(getuid())->pw_name, hostname,pwd);
        
 	s = fgets(command, MAX_LEN_LINE, stdin);
@@ -47,7 +47,19 @@ int main(void)
 	if (!strcmp(command,"exit")){
 		return -1;
 	}
-        
+        else if ((command[0]=='c')&&(command[1]=='d')){
+         	arg = strtok(command, " ");
+		arg = strtok(NULL, " ");
+		if(chdir(arg)<0){
+			printf("there is no directory [%s].\n",arg);
+			continue;
+		}
+		else{
+			printf("change directory!\n");
+			continue;
+		}
+	}
+	
         printf("[%s]\n", command);
      
         pid = fork();
@@ -69,21 +81,12 @@ int main(void)
 	    arg = strtok(command, " ");
 	    if (!strcmp(arg, "ls")){
 		    arg = strtok(NULL, " ");
-		    if (arg == NULL){
-			    args[0] = "/bin/ls";
-		    }
-		    else if (!strcmp(arg,"-l")){
-
-		    }
-		    else{
-			    printf("there is no option [%s] in command\n", arg);
-		    }
+		    args[0] = "/bin/ls";
+		    args[1] = arg;
 	    }
-	    else if (!strcmp(arg, "cd")){
-
-	    }
+     
 	    else {
-	    	    printf ("there is no command [%s].",arg);
+	    	    printf ("there is no command [%s].\n",arg);
 	    }
 	    ret = execve(args[0], args, NULL);
 	    if (ret < 0) {
