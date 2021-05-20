@@ -15,6 +15,7 @@ int main(void)
 {
     char command[MAX_LEN_LINE];
     char *args[] = {command, NULL};
+    char *arg;
     int ret, status;
     pid_t pid, cpid;
 
@@ -32,30 +33,20 @@ int main(void)
        
 	s = fgets(command, MAX_LEN_LINE, stdin);
 	
-	command[strlen(command) -1] = '\0';
-
 	if (s == NULL) {
             fprintf(stderr, "fgets failed\n");
             exit(1);
         }
-        	else if (strcmp(command, "exit")==0){
-	    return -1;
-	}
-	else if (strcmp(command,"ls")==0){
-	    args[0] = "/bin/ls";
-	}
-	else if (strcmp(command, "cd")==0){
-	    //chdir(arg);
-	}
-	else{
-	    fprintf(stderr, "[there is no command %s.]\n", command);
-	}
-	
-    	len = strlen(command);
+    	
+	len = strlen(command);
 	printf("%d\n", len);	
         if (command[len - 1] == '\n') {
             command[len - 1] = '\0'; 
         }
+
+	if (!strcmp(command,"exit")){
+		return -1;
+	}
         
         printf("[%s]\n", command);
      
@@ -75,6 +66,25 @@ int main(void)
             }
         }
         else {  /* child */
+	    arg = strtok(command, " ");
+	    if (!strcmp(arg, "ls")){
+		    arg = strtok(NULL, " ");
+		    if (arg == NULL){
+			    args[0] = "/bin/ls";
+		    }
+		    else if (!strcmp(arg,"-l")){
+
+		    }
+		    else{
+			    printf("there is no option [%s] in command\n", arg);
+		    }
+	    }
+	    else if (!strcmp(arg, "cd")){
+
+	    }
+	    else {
+	    	    printf ("there is no command [%s].",arg);
+	    }
 	    ret = execve(args[0], args, NULL);
 	    if (ret < 0) {
                 fprintf(stderr, "execve failed\n");   
@@ -85,4 +95,5 @@ int main(void)
     }
     return 0;
 }
+
 
