@@ -15,7 +15,8 @@ int main(void)
 {
     char command[MAX_LEN_LINE];
     char *arg;
-    char *args[] = {command, arg, NULL};
+    char *arg2;
+    char *args[] = {command, arg, arg2, NULL};
     int ret, status;
     pid_t pid, cpid;
 
@@ -43,23 +44,25 @@ int main(void)
         if (command[len - 1] == '\n') {
             command[len - 1] = '\0'; 
         }
+	
+	arg = strtok(command," ");
 
 	if (!strcmp(command,"exit")){
 		return -1;
 	}
-        else if ((command[0]=='c')&&(command[1]=='d')){
-         	arg = strtok(command, " ");
+
+        else if (!strcmp(arg, "cd")){
 		arg = strtok(NULL, " ");
 		if(chdir(arg)<0){
-			printf("there is no directory [%s].\n",arg);
+			printf("ERROR : Inexistence Directory [%s].\n",arg);
 			continue;
 		}
 		else{
-			printf("change directory!\n");
+			printf("change directory successfully!\n");
 			continue;
 		}
 	}
-	
+
         printf("[%s]\n", command);
      
         pid = fork();
@@ -78,15 +81,31 @@ int main(void)
             }
         }
         else {  /* child */
-	    arg = strtok(command, " ");
 	    if (!strcmp(arg, "ls")){
 		    arg = strtok(NULL, " ");
 		    args[0] = "/bin/ls";
 		    args[1] = arg;
+		    args[2] = NULL;
+	    }
+
+	    else if (!strcmp(arg, "mkdir")){
+		    arg = strtok(NULL, " ");
+		    args[0] = "/bin/mkdir";
+		    args[1] = arg;
+		    arg2 = strtok(NULL, " ");
+		    args[2] = arg2;
+	    }
+
+	    else if (!strcmp(arg, "rmdir")){
+		    arg = strtok(NULL, " ");
+		    args[0] = "/bin/rmdir";
+		    args[1] = arg;
+		    arg2 = strtok(NULL, " ");
+		    args[2] = arg2;
 	    }
      
 	    else {
-	    	    printf ("there is no command [%s].\n",arg);
+	    	    printf ("ERROR : Inexistence Command [%s].\n",arg);
 	    }
 	    ret = execve(args[0], args, NULL);
 	    if (ret < 0) {
