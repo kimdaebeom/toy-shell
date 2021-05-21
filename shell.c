@@ -16,7 +16,8 @@ int main(void)
     char command[MAX_LEN_LINE];
     char *arg;
     char *arg2;
-    char *args[] = {command, arg, arg2, NULL};
+    char *arg3;
+    char *args[] = {command, arg, arg2, arg3, NULL};
     int ret, status;
     pid_t pid, cpid;
 
@@ -86,6 +87,7 @@ int main(void)
 		    args[0] = "/bin/ls";
 		    args[1] = arg;
 		    args[2] = NULL;
+		    args[3] = NULL;
 	    }
 
 	    else if (!strcmp(arg, "mkdir")){
@@ -94,6 +96,7 @@ int main(void)
 		    args[1] = arg;
 		    arg2 = strtok(NULL, " ");
 		    args[2] = arg2;
+		    args[3] = NULL;
 	    }
 
 	    else if (!strcmp(arg, "rmdir")){
@@ -102,6 +105,25 @@ int main(void)
 		    args[1] = arg;
 		    arg2 = strtok(NULL, " ");
 		    args[2] = arg2;
+	    }
+
+	    else if (!strcmp(arg, "mv")){
+		    arg = strtok(NULL, " ");
+		    args[0] = "/bin/mv";
+		    args[1] = arg;
+		    arg2 = strtok(NULL, " ");
+		    args[2] = arg2;
+		    arg3 = strtok(NULL, " ");
+		    args[3] = arg3;
+	    }
+
+	    else if (!strcmp(arg, "rm")){
+		    arg = strtok(NULL, " ");
+		    args[0] = "/bin/rm";
+		    args[1] = arg;
+		    arg2 = strtok(NULL, " ");
+		    args[2] = arg2;
+		    args[3] = NULL;
 	    }
      
 	    else {
