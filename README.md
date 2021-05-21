@@ -1,10 +1,15 @@
 # toy-shell
 
-#### - Forked from professor JongChan Kim.
+#### - Class of Professor JongChan Kim.
 
 #### - Project : Make your own shell 
 
 #### - OS version : Ubuntu Linux 18.04 
+
+- Maintain the existing shell's frame.
+
+- Doesn't modify the output from the shell in the existing frame.
+
 
 
 ## Supported Commands in this shell
