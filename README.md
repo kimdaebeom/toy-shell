@@ -1,15 +1,13 @@
 # toy-shell
 
+#### - Forked from professor JongChan Kim.
 
-#### - implement simple shell forked from professor Jong Chan Kim.
+#### - Project : Make your own shell 
 
 #### - OS version : Ubuntu Linux 18.04 
 
 
-
-
-
-## Implemented Command Lines
+## Supported Commands in this shell
 
 
 - exit : exit shell
