@@ -1,16 +1,11 @@
 # toy-shell
 
-<<<<<<< HEAD
-##- implement simple shell forked from professor Jong Chan Kim.
-##- OS version : Ubuntu Linux 18.04 
-
-#### Implemented Command Lines
-=======
 ### - implement simple shell forked from professor Jong Chan Kim.
 ### - OS version : Ubuntu Linux 18.04 
 
+
 ## Implemented Command Lines
->>>>>>> 770aa2fa57e79687403ee0b45e29282eee6103eb
+
 - exit : exit shell
 - cd : change directories
 	ex> cd .. / cd [dir]
