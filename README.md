@@ -33,3 +33,11 @@
 - [ rmdir ] : remove directory
 
     >	ex> rmdir [dir], rmdir -p [dir], rmdir -v [dir] (every option)
+
+- [ rm ] : remove files or directory
+    
+    >   ex> rm [file], rm -f [file], rm -i [file] ...etc (every option)
+
+- [ mv ] : move files or directory to another directory
+
+    >   ex> mv [file], mv -b [file], mv -f [file] ...etc (every option)
