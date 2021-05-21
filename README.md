@@ -49,3 +49,10 @@
 - [ sleep ] : stop (sleep) the shell for a given time (input)
 
     >   ex> sleep 1s (second), sleep 1m (minute) ...etc (every option)
+
+
+- [ date ] : Today's year, month, day, day, time, etc. are printed.
+
+    >   ex> date
+
+
