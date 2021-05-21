@@ -10,6 +10,8 @@
 
 - Doesn't modify the output from the shell in the existing frame.
 
+- In shell's prompt, user, host and cwd are showed. and they could be distinguished by their specified colors.
+
 
 
 ## Supported Commands in this shell
