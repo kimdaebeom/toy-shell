@@ -46,4 +46,6 @@
 
     >   ex> echo [input], echo -n [input], echo -e [with commands like \a, \v, \r, \t, \c...] ...etc (every option except *)
 
+- [ sleep ] : stop (sleep) the shell for a given time (input)
 
+    >   ex> sleep 1s (second), sleep 1m (minute) ...etc (every option)
