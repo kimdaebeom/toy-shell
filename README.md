@@ -56,3 +56,12 @@
     >   ex> date
 
 
+- [ touch ] : Initialize the timestamp of the file to the current or create a new file
+
+    >   ex> touch [file], touch [file1] [file2] ...etc (support until 3 files)
+
+
+- [ chmod ] : Change the file's or directory's mode (authority)
+
+    >   ex> chmod [mode] [file], chmod 777 a.out, chmod +x a.out ...etc
+
