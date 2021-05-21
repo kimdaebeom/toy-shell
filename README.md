@@ -41,3 +41,9 @@
 - [ mv ] : move files or directory to another directory
 
     >   ex> mv [file], mv -b [file], mv -f [file] ...etc (every option)
+
+- [ echo ] : print texts or input string combined " "
+
+    >   ex> echo [input], echo -n [input], echo -e [with commands like \a, \v, \r, \t, \c...] ...etc (every option except *)
+
+
