@@ -12,7 +12,7 @@
 
 - In shell's prompt, user, host and cwd are showed. and they could be distinguished by their specified colors.
 
-
+--------------------------
 
 ## Supported Commands in this shell
 
@@ -73,6 +73,7 @@
     >   ex> chmod [mode] [file], chmod 777 a.out, chmod +x a.out ...etc
 
 
+--------------------------
 
 
 #### Simple command to apply creating pipe and closing pipe in shell.
@@ -81,6 +82,6 @@
 
 - [ pipe_read ] : using [ popen ] function with 'reading mode' and [ pclose ] to print out the date command. [date]
 
-' ' '
+~~~
     ex> type [ pipe_write ] or [ pipe_read ] in the shell and check the result.
-' ' '
+~~~
