@@ -72,3 +72,12 @@
 
     >   ex> chmod [mode] [file], chmod 777 a.out, chmod +x a.out ...etc
 
+
+
+
+#### Simple command to apply creating pipe and closing pipe in shell.
+
+- [ pipe_write ] : using [ popen ] function with 'writing mode' and [ pclose ] to print out list of current directory. [ls -l]
+
+- [ pipe_read ] : using [ popen ] function with 'reading mode' and [ pclose ] to print out the date command. [date]
+
