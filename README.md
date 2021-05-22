@@ -80,6 +80,7 @@
 - [ pipe_write ] : using [ popen ] function with 'writing mode' and [ pclose ] to print out list of current directory. [ls -l]
 
 - [ pipe_read ] : using [ popen ] function with 'reading mode' and [ pclose ] to print out the date command. [date]
-'''
-       ex> type [ pipe_write ] or [ pipe_read ] in the shell and check the result.
-'''
+
+' ' '
+    ex> type [ pipe_write ] or [ pipe_read ] in the shell and check the result.
+' ' '
